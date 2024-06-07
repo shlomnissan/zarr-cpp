@@ -10,7 +10,7 @@ using namespace zarr;
 
 TEST(zarr, read_zarr) {
     Zarr::Read(
-        std::make_unique<DirectoryStore>("path")
+        std::make_unique<DirectoryStore>("fixtures/simple_BE.zarr")
     );
 
     EXPECT_EQ(true, true);

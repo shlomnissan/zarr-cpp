@@ -8,6 +8,8 @@ namespace zarr {
 class Store {
 public:
     [[nodiscard]] virtual auto ContainsItem() -> bool = 0;
+
+    virtual ~Store() {}
 };
 
 }
