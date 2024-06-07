@@ -13,8 +13,9 @@ set(SOURCE_CODE
 )
 
 set(PUBLIC_HEADERS
-    "${PUBLIC_HEADERS_DIR}/zarr.hpp"
     "${PUBLIC_HEADERS_DIR}/directory_store.hpp"
+    "${PUBLIC_HEADERS_DIR}/errors.hpp"
+    "${PUBLIC_HEADERS_DIR}/zarr.hpp"
 )
 
 add_library(${TARGET_NAME} ${SOURCE_CODE})

@@ -3,8 +3,18 @@
 
 #include "zarr/zarr.hpp"
 
+#include <fmt/format.h>
+
+#include "zarr/errors.hpp"
+
 using namespace zarr;
 
 auto Zarr::Read(std::unique_ptr<Store> store) -> void {
-    // TODO: impl.
+    if (!contains_array(store.get())) {
+        throw ArrayNotFoundError {fmt::format(
+            "array not found at path {}", store->Path()
+        )};
+    }
+
+    // TODO: create a ZarrArray
 }

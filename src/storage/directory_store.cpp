@@ -14,6 +14,10 @@ using namespace zarr;
 DirectoryStore::DirectoryStore(std::string_view path)
     : path_(path) {}
 
+auto DirectoryStore::Path() -> std::string_view {
+    return path_;
+}
+
 auto DirectoryStore::ContainsItem(std::string_view item) -> bool {
     auto path = fs::path {fmt::format("{}/{}", path_, item)};
     return fs::exists(path);

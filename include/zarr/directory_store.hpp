@@ -18,6 +18,8 @@ public:
 
     auto ContainsItem(std::string_view item) -> bool override;
 
+    auto Path() -> std::string_view override;
+
 private:
     std::string path_ {};
 };
