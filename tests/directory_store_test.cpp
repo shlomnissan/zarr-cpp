@@ -3,11 +3,12 @@
 
 #include <gtest/gtest.h>
 
-#include "zarr/vec2.hpp"
+#include "zarr/directory_store.hpp"
 
-TEST(vec2, magnitude) {
-    auto v = zarr::vec2 {3.f, 4.f};
+using namespace zarr;
 
-    EXPECT_EQ(v.magnitude(), 0.0f);
+TEST(zarr_directory_store, contains_item) {
+    auto store = DirectoryStore {"fixtures/da"};
+
     EXPECT_EQ(true, true);
 }

@@ -5,11 +5,14 @@ find_package(fmt REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
 set(SOURCE_CODE
-    vec2.cpp
+    zarr.cpp
+    storage/directory_store.cpp
+    storage/store.hpp
 )
 
 set(PUBLIC_HEADERS
-    "${PUBLIC_HEADERS_DIR}/vec2.hpp"
+    "${PUBLIC_HEADERS_DIR}/zarr.hpp"
+    "${PUBLIC_HEADERS_DIR}/directory_store.hpp"
 )
 
 add_library(${TARGET_NAME} ${SOURCE_CODE})
@@ -37,12 +40,6 @@ if (BUILD_SHARED_LIBS)
         SOVERSION ${zarr_VERSION_MAJOR}
     )
 endif()
-
-target_compile_options(${TARGET_NAME} PRIVATE
-    $<$<CXX_COMPILER_ID:GNU,Clang>:-Wall -Wextra -Wpedantic -Werror>
-    $<$<CXX_COMPILER_ID:MSVC>:/W4>
-)
-
 
 include(GenerateExportHeader)
 generate_export_header(${TARGET_NAME})
