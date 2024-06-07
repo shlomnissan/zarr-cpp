@@ -5,9 +5,11 @@ find_package(fmt REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
 set(SOURCE_CODE
-    zarr.cpp
+    names.hpp
     storage/directory_store.cpp
+    storage/store.cpp
     storage/store.hpp
+    zarr.cpp
 )
 
 set(PUBLIC_HEADERS

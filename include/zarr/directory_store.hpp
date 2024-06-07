@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <string>
 #include <string_view>
 
 #include "zarr_export.h"
@@ -15,7 +16,10 @@ class ZARR_EXPORT DirectoryStore : public Store {
 public:
     explicit DirectoryStore(std::string_view path);
 
-    auto ContainsItem() -> bool override;
+    auto ContainsItem(std::string_view item) -> bool override;
+
+private:
+    std::string path_ {};
 };
 
 }

@@ -3,13 +3,18 @@
 
 #include "zarr/directory_store.hpp"
 
+#include <filesystem>
+
+#include <fmt/format.h>
+
+namespace fs = std::filesystem;
+
 using namespace zarr;
 
-DirectoryStore::DirectoryStore(std::string_view path) {
-    // TODO: impl.
-}
+DirectoryStore::DirectoryStore(std::string_view path)
+    : path_(path) {}
 
-auto DirectoryStore::ContainsItem() -> bool {
-    // TODO: impl.
-    return false;
+auto DirectoryStore::ContainsItem(std::string_view item) -> bool {
+    auto path = fs::path {fmt::format("{}/{}", path_, item)};
+    return fs::exists(path);
 }

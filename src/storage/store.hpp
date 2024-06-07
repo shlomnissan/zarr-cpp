@@ -3,13 +3,18 @@
 
 #pragma once
 
+#include <string_view>
+
 namespace zarr {
 
 class Store {
 public:
-    [[nodiscard]] virtual auto ContainsItem() -> bool = 0;
+    [[nodiscard]]
+    virtual auto ContainsItem(std::string_view path) -> bool = 0;
 
     virtual ~Store() {}
 };
+
+auto contains_array(Store*) -> bool;
 
 }

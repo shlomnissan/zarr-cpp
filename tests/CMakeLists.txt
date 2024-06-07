@@ -17,7 +17,10 @@ if (NOT GTest_FOUND)
     ")
 endif()
 
-file(GLOB TEST_SOURCES ${CMAKE_CURRENT_LIST_DIR}/*.cpp)
+file(GLOB TEST_SOURCES
+    ${CMAKE_CURRENT_LIST_DIR}/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/**/*.cpp
+)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/src)
