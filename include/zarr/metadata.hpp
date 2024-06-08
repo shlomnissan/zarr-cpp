@@ -5,12 +5,22 @@
 
 #include "zarr_export.h"
 
+#include <optional>
+#include <string>
+#include <vector>
+
 #include "storage/store.hpp"
 
 namespace zarr {
 
 struct ZARR_EXPORT Metadata {
-    unsigned zarr_format;
+    unsigned int                zarr_format;
+    std::string                 dimension_separator;
+    std::string                 dtype;
+    std::string                 order;
+    std::vector<unsigned int>   chunks;
+    std::vector<unsigned int>   shape;
+    std::optional<unsigned int> fill_value;
 };
 
 [[nodiscard]]
