@@ -6,11 +6,9 @@
 #include "zarr/directory_store.hpp"
 #include "zarr/metadata.hpp"
 
-using namespace zarr;
-
 TEST(zarr_metadata, verify_load_metadata) {
-    auto store = DirectoryStore::Create("fixtures/simple_BE.zarr");
-    auto metadata = load_metadata(store.get());
+    auto store = zarr::DirectoryStore::Create("fixtures/simple_BE.zarr");
+    auto metadata = zarr::load_metadata(store.get());
 
     EXPECT_EQ(metadata.chunks, std::vector<unsigned int>({2, 8}));
     EXPECT_EQ(metadata.dimension_separator, ".");

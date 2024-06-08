@@ -7,14 +7,11 @@
 
 #include "zarr/errors.hpp"
 
-using namespace zarr;
-
-auto Zarr::Open(std::unique_ptr<Store> store) -> ZarrArray {
+auto zarr::open(std::unique_ptr<Store> store) -> ZarrArray {
     if (!contains_array(store.get())) {
         throw ArrayNotFound {fmt::format(
             "array not found at path {}", store->Path()
         )};
     }
-
     return ZarrArray(std::move(store));
 }

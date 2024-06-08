@@ -5,10 +5,8 @@
 
 #include "zarr/directory_store.hpp"
 
-using namespace zarr;
-
 TEST(zarr_storage, contains_array) {
-    auto store = DirectoryStore::Create("fixtures/simple_BE.zarr");
+    auto store = zarr::DirectoryStore::Create("fixtures/simple_BE.zarr");
 
     EXPECT_EQ(contains_array(store.get()), true);
 }

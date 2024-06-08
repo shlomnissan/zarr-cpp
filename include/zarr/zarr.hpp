@@ -13,10 +13,7 @@
 
 namespace zarr {
 
-class ZARR_EXPORT Zarr {
-public:
-    [[nodiscard]]
-    static auto Open(std::unique_ptr<Store> store) -> ZarrArray;
-};
+[[nodiscard]]
+auto ZARR_EXPORT open(std::unique_ptr<Store> store) -> ZarrArray;
 
 }

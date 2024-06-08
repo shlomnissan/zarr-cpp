@@ -5,8 +5,6 @@
 
 #include "zarr/zarr_array.hpp"
 
-using namespace zarr;
-
 TEST(zarr_array, init) {
     // TODO: impl.
 }
