@@ -16,7 +16,7 @@ namespace zarr {
 class ZARR_EXPORT Zarr {
 public:
     [[nodiscard]]
-    static auto Read(std::unique_ptr<Store> store) -> ZarrArray;
+    static auto Open(std::unique_ptr<Store> store) -> ZarrArray;
 };
 
 }

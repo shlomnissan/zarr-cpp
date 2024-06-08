@@ -9,7 +9,7 @@
 
 using namespace zarr;
 
-auto Zarr::Read(std::unique_ptr<Store> store) -> ZarrArray {
+auto Zarr::Open(std::unique_ptr<Store> store) -> ZarrArray {
     if (!contains_array(store.get())) {
         throw ArrayNotFound {fmt::format(
             "array not found at path {}", store->Path()
