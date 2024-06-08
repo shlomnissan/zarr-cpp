@@ -7,7 +7,7 @@
 
 #include "zarr/errors.hpp"
 
-auto zarr::open(std::unique_ptr<Store> store) -> ZarrArray {
+auto zarr::Open(std::unique_ptr<Store> store) -> ZarrArray {
     if (!contains_array(store.get())) {
         throw ArrayNotFound {fmt::format(
             "array not found at path {}", store->Path()

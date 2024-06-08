@@ -14,6 +14,6 @@
 namespace zarr {
 
 [[nodiscard]]
-auto ZARR_EXPORT open(std::unique_ptr<Store> store) -> ZarrArray;
+auto ZARR_EXPORT Open(std::unique_ptr<Store> store) -> ZarrArray;
 
 }

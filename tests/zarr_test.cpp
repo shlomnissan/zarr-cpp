@@ -8,7 +8,7 @@
 #include "zarr/errors.hpp"
 
 TEST(zarr, read_zarr) {
-    auto arr = zarr::open(
+    auto arr = zarr::Open(
         zarr::DirectoryStore::Create("fixtures/simple_BE.zarr")
     );
     // TODO: impl.
@@ -17,7 +17,7 @@ TEST(zarr, read_zarr) {
 TEST(zarr, exception_array_not_found) {
     EXPECT_THROW({
         try {
-            auto arr = zarr::open(
+            auto arr = zarr::Open(
                 zarr::DirectoryStore::Create("bad_path.zarr")
             );
         } catch(const zarr::ArrayNotFound& e) {
