@@ -7,6 +7,8 @@
 
 #include "zarr_export.h"
 
+#include "zarr/metadata.hpp"
+
 #include "storage/store.hpp"
 
 namespace zarr {
@@ -17,6 +19,8 @@ public:
 
 private:
     std::unique_ptr<Store> store_;
+
+    Metadata metadata_;
 };
 
 }

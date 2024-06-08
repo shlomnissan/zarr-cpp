@@ -20,4 +20,12 @@ namespace zarr {
     struct ZARR_EXPORT FailedToReadData : public std::runtime_error {
         using std::runtime_error::runtime_error;
     };
+
+    struct ZARR_EXPORT MetadataParseError : public std::runtime_error {
+        using std::runtime_error::runtime_error;
+    };
+
+    struct ZARR_EXPORT NotSupported : public std::runtime_error {
+        using std::runtime_error::runtime_error;
+    };
 }

@@ -13,7 +13,9 @@ struct ZARR_EXPORT Metadata {
     unsigned zarr_format;
 };
 
-// TODO: add no discard
-auto load_metadata(Store* store) -> void;
+[[nodiscard]]
+auto load_metadata(Store* store) -> Metadata;
+
+auto validate_metadata(const Metadata& metadata) -> void;
 
 };

@@ -3,8 +3,11 @@
 
 #include "zarr/zarr_array.hpp"
 
+#include "zarr/metadata.hpp"
+
 using namespace zarr;
 
 ZarrArray::ZarrArray(std::unique_ptr<Store> store) : store_(std::move(store)) {
-    // TODO: load metadata
+    metadata_ = load_metadata(store_.get());
+    validate_metadata(metadata_);
 }

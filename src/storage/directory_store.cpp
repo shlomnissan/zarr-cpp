@@ -41,11 +41,12 @@ auto DirectoryStore::GetItem(std::string_view item, bool binary) -> Buffer {
     auto length = std::streamsize {file.tellg()};
     file.seekg(0, std::ios::beg);
     if (length < 0) {
-        throw FailedToReadData { fmt::format("failed to read data for key {}", item)};
+        throw FailedToReadData { fmt::format("failed to read data length for key {}", item)};
     }
 
     auto buffer = Buffer(length);
-    if (!file.read(buffer.data(), length)) {
+    file.read(buffer.data(), length);
+    if (file.fail() || file.gcount() != length) {
         throw FailedToReadData { fmt::format("failed to read data for key {}", item)};
     }
 

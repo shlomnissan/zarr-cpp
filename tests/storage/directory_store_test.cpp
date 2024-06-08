@@ -4,6 +4,9 @@
 #include <gtest/gtest.h>
 
 #include "zarr/directory_store.hpp"
+#include "zarr/errors.hpp"
+
+#include "names.hpp"
 
 using namespace zarr;
 
@@ -20,5 +23,13 @@ TEST(zarr_directory_store, get_item_char_stream) {
 }
 
 TEST(zarr_directory_store, exception_get_item_key_not_found) {
-    // impl.
+    EXPECT_THROW({
+        try {
+            auto store = DirectoryStore::Create("fixtures/simple_BE.zarr");
+            auto item = store->GetItem("bad_item");
+        } catch (const KeyNotFound& e) {
+            EXPECT_STREQ(e.what(), "key bad_item not found");
+            throw;
+        }
+    }, KeyNotFound);
 }
