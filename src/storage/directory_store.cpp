@@ -4,8 +4,11 @@
 #include "zarr/directory_store.hpp"
 
 #include <filesystem>
+#include <fstream>
 
 #include <fmt/format.h>
+
+#include "zarr/errors.hpp"
 
 namespace fs = std::filesystem;
 
@@ -25,4 +28,26 @@ auto DirectoryStore::Path() -> std::string_view {
 auto DirectoryStore::ContainsItem(std::string_view item) -> bool {
     auto path = fs::path {fmt::format("{}/{}", path_, item)};
     return fs::exists(path);
+}
+
+auto DirectoryStore::GetItem(std::string_view item, bool binary) -> Buffer {
+    auto path = fmt::format("{}/{}", path_, item);
+    auto file = std::ifstream(path, binary ?  std::ios::binary : std::ios::in);
+    if (!file) {
+        throw KeyNotFound { fmt::format("key {} not found", item)};
+    }
+
+    file.seekg(0, std::ios::end);
+    auto length = std::streamsize {file.tellg()};
+    file.seekg(0, std::ios::beg);
+    if (length < 0) {
+        throw FailedToReadData { fmt::format("failed to read data for key {}", item)};
+    }
+
+    auto buffer = Buffer(length);
+    if (!file.read(buffer.data(), length)) {
+        throw FailedToReadData { fmt::format("failed to read data for key {}", item)};
+    }
+
+    return buffer;
 }

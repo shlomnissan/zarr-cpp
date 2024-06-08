@@ -8,7 +8,17 @@
 using namespace zarr;
 
 TEST(zarr_directory_store, contains_item) {
-    auto store = DirectoryStore::Create("fixtures/simple_BE.zarr");
+    // impl.
+}
 
-    EXPECT_EQ(true, true);
+TEST(zarr_directory_store, get_item_binary) {
+    // impl.
+}
+
+TEST(zarr_directory_store, get_item_char_stream) {
+    // impl.
+}
+
+TEST(zarr_directory_store, exception_get_item_key_not_found) {
+    // impl.
 }

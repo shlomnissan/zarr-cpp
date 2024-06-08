@@ -5,10 +5,15 @@
 
 #include "zarr_export.h"
 
+#include "storage/store.hpp"
+
 namespace zarr {
 
 struct ZARR_EXPORT Metadata {
-
+    unsigned zarr_format;
 };
+
+// TODO: add no discard
+auto load_metadata(Store* store) -> void;
 
 };

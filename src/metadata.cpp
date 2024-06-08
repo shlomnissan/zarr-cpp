@@ -2,3 +2,9 @@
 // Author: Shlomi Nissan (shlomi@betamark.com)
 
 #include "zarr/metadata.hpp"
+
+using namespace zarr;
+
+auto load_metadata(Store* store) -> void {
+
+}

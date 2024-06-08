@@ -9,12 +9,12 @@
 
 using namespace zarr;
 
-auto Zarr::Read(std::unique_ptr<Store> store) -> void {
+auto Zarr::Read(std::unique_ptr<Store> store) -> ZarrArray {
     if (!contains_array(store.get())) {
-        throw ArrayNotFoundError {fmt::format(
+        throw ArrayNotFound {fmt::format(
             "array not found at path {}", store->Path()
         )};
     }
 
-    // TODO: create a ZarrArray
+    return ZarrArray(std::move(store));
 }

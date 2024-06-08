@@ -8,13 +8,15 @@
 
 #include "zarr_export.h"
 
+#include "zarr/zarr_array.hpp"
 #include "storage/store.hpp"
 
 namespace zarr {
 
 class ZARR_EXPORT Zarr {
 public:
-    static auto Read(std::unique_ptr<Store> store) -> void;
+    [[nodiscard]]
+    static auto Read(std::unique_ptr<Store> store) -> ZarrArray;
 };
 
 }
