@@ -10,15 +10,14 @@
 using namespace zarr;
 
 TEST(zarr, read_zarr) {
-    Zarr::Read(std::make_unique<DirectoryStore>("fixtures/simple_BE.zarr"));
-
+    Zarr::Read(DirectoryStore::Create("fixtures/simple_BE.zarr"));
     // TODO: impl.
 }
 
 TEST(zarr, exception_array_not_found) {
     EXPECT_THROW({
         try {
-            Zarr::Read(std::make_unique<DirectoryStore>("bad_path.zarr"));
+            Zarr::Read(DirectoryStore::Create("bad_path.zarr"));
         } catch(const ArrayNotFoundError& e) {
             EXPECT_STREQ(e.what(), "array not found at path bad_path.zarr");
             throw;

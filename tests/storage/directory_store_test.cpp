@@ -8,7 +8,7 @@
 using namespace zarr;
 
 TEST(zarr_directory_store, contains_item) {
-    auto store = DirectoryStore {"fixtures/da"};
+    auto store = DirectoryStore::Create("fixtures/simple_BE.zarr");
 
     EXPECT_EQ(true, true);
 }

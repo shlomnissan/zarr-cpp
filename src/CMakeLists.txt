@@ -5,17 +5,21 @@ find_package(fmt REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
 set(SOURCE_CODE
+    metadata.cpp
     names.hpp
     storage/directory_store.cpp
     storage/store.cpp
     storage/store.hpp
     zarr.cpp
+    zarr_array.cpp
 )
 
 set(PUBLIC_HEADERS
     "${PUBLIC_HEADERS_DIR}/directory_store.hpp"
     "${PUBLIC_HEADERS_DIR}/errors.hpp"
+    "${PUBLIC_HEADERS_DIR}/metadata.hpp"
     "${PUBLIC_HEADERS_DIR}/zarr.hpp"
+    "${PUBLIC_HEADERS_DIR}/zarr_array.hpp"
 )
 
 add_library(${TARGET_NAME} ${SOURCE_CODE})

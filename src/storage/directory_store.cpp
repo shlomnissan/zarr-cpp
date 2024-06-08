@@ -14,6 +14,10 @@ using namespace zarr;
 DirectoryStore::DirectoryStore(std::string_view path)
     : path_(path) {}
 
+auto DirectoryStore::Create(std::string_view path) -> std::unique_ptr<DirectoryStore> {
+    return std::make_unique<DirectoryStore>(path);
+}
+
 auto DirectoryStore::Path() -> std::string_view {
     return path_;
 }
