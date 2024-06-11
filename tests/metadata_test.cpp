@@ -8,12 +8,13 @@
 
 #include <fmt/format.h>
 
-#include "zarr/directory_store.hpp"
 #include "zarr/errors.hpp"
 #include "zarr/metadata.hpp"
 
+#include "file_system.hpp"
+
 TEST(zarr_metadata, verify_load_metadata) {
-    auto store = zarr::DirectoryStore::Create("fixtures/simple_BE.zarr");
+    auto store = zarr::FileSystem::Create("fixtures/simple_BE.zarr");
     auto metadata = zarr::load_metadata(store.get());
 
     EXPECT_EQ(metadata.chunks, std::vector<unsigned int>({2, 8}));

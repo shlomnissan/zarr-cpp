@@ -1,7 +1,7 @@
 // Copyright 2024 Betamark Pty Ltd. All rights reserved.
 // Author: Shlomi Nissan (shlomi@betamark.com)
 
-#include "zarr/directory_store.hpp"
+#include "file_system.hpp"
 
 #include <filesystem>
 #include <fstream>
@@ -14,23 +14,20 @@ namespace fs = std::filesystem;
 
 using namespace zarr;
 
-DirectoryStore::DirectoryStore(std::string_view path)
-    : path_(path) {}
+FileSystem::FileSystem(std::string_view path) : path_(path) {}
 
-auto DirectoryStore::Create(std::string_view path) -> std::unique_ptr<DirectoryStore> {
-    return std::make_unique<DirectoryStore>(path);
+auto FileSystem::Create(std::string_view path) -> std::unique_ptr<FileSystem> {
+    return std::unique_ptr<FileSystem>(new FileSystem(path));
 }
 
-auto DirectoryStore::Path() -> std::string_view {
-    return path_;
-}
+auto FileSystem::Path() -> std::string_view { return path_; }
 
-auto DirectoryStore::ContainsItem(std::string_view item) -> bool {
+auto FileSystem::ContainsItem(std::string_view item) -> bool {
     auto path = fs::path {fmt::format("{}/{}", path_, item)};
     return fs::exists(path);
 }
 
-auto DirectoryStore::GetItem(std::string_view item, bool binary) -> Buffer {
+auto FileSystem::GetItem(std::string_view item, bool binary) -> Buffer {
     auto path = fmt::format("{}/{}", path_, item);
     auto file = std::ifstream(path, binary ?  std::ios::binary : std::ios::in);
     if (!file) {

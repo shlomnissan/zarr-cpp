@@ -25,7 +25,6 @@ public:
     virtual ~Store() {}
 };
 
-[[nodiscard]]
-auto contains_array(Store*) -> bool;
+[[nodiscard]] auto contains_array(Store*) -> bool;
 
 }

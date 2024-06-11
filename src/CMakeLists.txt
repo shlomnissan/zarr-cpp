@@ -4,15 +4,15 @@ set(PUBLIC_HEADERS_DIR ${CMAKE_SOURCE_DIR}/include/zarr)
 set(SOURCE_CODE
     metadata.cpp
     names.hpp
-    storage/directory_store.cpp
-    storage/store.cpp
-    storage/store.hpp
+    file_system.cpp
+    file_system.hpp
+    store.cpp
+    store.hpp
     zarr.cpp
     zarr_array.cpp
 )
 
 set(PUBLIC_HEADERS
-    "${PUBLIC_HEADERS_DIR}/directory_store.hpp"
     "${PUBLIC_HEADERS_DIR}/errors.hpp"
     "${PUBLIC_HEADERS_DIR}/metadata.hpp"
     "${PUBLIC_HEADERS_DIR}/zarr.hpp"

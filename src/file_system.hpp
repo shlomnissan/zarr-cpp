@@ -7,17 +7,13 @@
 #include <string>
 #include <string_view>
 
-#include "zarr_export.h"
-
-#include "storage/store.hpp"
+#include "store.hpp"
 
 namespace zarr {
 
-class ZARR_EXPORT DirectoryStore : public Store {
+class FileSystem : public Store {
 public:
-    explicit DirectoryStore(std::string_view path);
-
-    static auto Create(std::string_view path) -> std::unique_ptr<DirectoryStore>;
+    static auto Create(std::string_view path) -> std::unique_ptr<FileSystem>;
 
     auto Path() -> std::string_view override;
 
@@ -27,6 +23,8 @@ public:
 
 private:
     std::string path_ {};
+
+    explicit FileSystem(std::string_view path);
 };
 
 }

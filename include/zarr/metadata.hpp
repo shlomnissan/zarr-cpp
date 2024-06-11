@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include "storage/store.hpp"
+#include "store.hpp"
 
 namespace zarr {
 

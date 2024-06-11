@@ -7,7 +7,10 @@
 
 #include "zarr/errors.hpp"
 
-auto zarr::Open(std::unique_ptr<Store> store) -> ZarrArray {
+#include "file_system.hpp"
+
+auto zarr::Open(std::string_view path) -> ZarrArray {
+    auto store = FileSystem::Create(path);
     if (!contains_array(store.get())) {
         throw ArrayNotFound {fmt::format(
             "array not found at path {}", store->Path()

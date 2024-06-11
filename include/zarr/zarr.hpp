@@ -3,17 +3,15 @@
 
 #pragma once
 
-#include <memory>
 #include <string_view>
 
-#include "zarr_export.h"
-
 #include "zarr/zarr_array.hpp"
-#include "storage/store.hpp"
+
+#include "zarr_export.h"
 
 namespace zarr {
 
 [[nodiscard]]
-auto ZARR_EXPORT Open(std::unique_ptr<Store> store) -> ZarrArray;
+auto ZARR_EXPORT Open(std::string_view path) -> ZarrArray;
 
 }

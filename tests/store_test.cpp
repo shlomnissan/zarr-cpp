@@ -3,10 +3,10 @@
 
 #include <gtest/gtest.h>
 
-#include "zarr/directory_store.hpp"
+#include "file_system.hpp"
 
-TEST(zarr_storage, contains_array) {
-    auto store = zarr::DirectoryStore::Create("fixtures/simple_BE.zarr");
+TEST(zarr_store, contains_array) {
+    auto store = zarr::FileSystem::Create("fixtures/simple_BE.zarr");
 
     EXPECT_EQ(contains_array(store.get()), true);
 }

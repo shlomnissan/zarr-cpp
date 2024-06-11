@@ -9,7 +9,7 @@
 
 #include "zarr/metadata.hpp"
 
-#include "storage/store.hpp"
+#include "store.hpp"
 
 namespace zarr {
 
