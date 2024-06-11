@@ -21,11 +21,11 @@ namespace zarr {
         using std::runtime_error::runtime_error;
     };
 
-    struct ZARR_EXPORT MetadataParseError : public std::runtime_error {
+    struct ZARR_EXPORT FailedToParseMetadata : public std::runtime_error {
         using std::runtime_error::runtime_error;
     };
 
-    struct ZARR_EXPORT NotSupported : public std::runtime_error {
+    struct ZARR_EXPORT FailedToValidateMetadata : public std::runtime_error {
         using std::runtime_error::runtime_error;
     };
 }

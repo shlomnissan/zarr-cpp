@@ -1,9 +1,6 @@
 set(TARGET_NAME zarr)
 set(PUBLIC_HEADERS_DIR ${CMAKE_SOURCE_DIR}/include/zarr)
 
-find_package(fmt REQUIRED)
-find_package(nlohmann_json REQUIRED)
-
 set(SOURCE_CODE
     metadata.cpp
     names.hpp

@@ -32,7 +32,7 @@ foreach(TEST IN LISTS TEST_SOURCES)
 
     set(TEST_TARGET run_${NAME_NO_EXT})
     add_executable(${TEST_TARGET} ${TEST})
-    target_link_libraries(${TEST_TARGET} PRIVATE gtest::gtest zarr)
+    target_link_libraries(${TEST_TARGET} PRIVATE gtest::gtest zarr fmt::fmt)
     add_test(${NAME_NO_EXT} ${TEST_TARGET})
 
     add_custom_command(

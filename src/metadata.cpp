@@ -2,13 +2,13 @@
 // Author: Shlomi Nissan (shlomi@betamark.com)
 
 #include "zarr/metadata.hpp"
+#include "zarr/errors.hpp"
 
+#include <regex>
 #include <string>
 
 #include <fmt/format.h>
 #include <nlohmann/json.hpp>
-
-#include "zarr/errors.hpp"
 
 #include "names.hpp"
 
@@ -29,7 +29,6 @@ namespace nlohmann {
 auto zarr::load_metadata(Store* store) -> Metadata {
     auto item = store->GetItem(ARRAY_META_KEY);
     auto json_string = std::string(begin(item), end(item));
-
     auto output = Metadata {};
     try {
         auto j = nlohmann::json::parse(json_string);
@@ -41,16 +40,45 @@ auto zarr::load_metadata(Store* store) -> Metadata {
         j.at("zarr_format").get_to(output.zarr_format);
         output.dimension_separator = j.value("dimension_separator", ".");
     } catch(const nlohmann::json::parse_error& e) {
-        throw MetadataParseError { e.what() };
+        throw FailedToParseMetadata { e.what() };
     }
-
     return output;
 }
 
-auto zarr::validate_metadata(const Metadata& metadata) -> void {
-    if (metadata.zarr_format != 2) {
-        throw NotSupported { fmt::format(
-            "zarr_format {} is not supported", metadata.zarr_format
+auto zarr::validate_zarr_format(unsigned int zarr_format) -> void {
+    if (zarr_format != 2) {
+        throw FailedToValidateMetadata { fmt::format(
+            "zarr_format value ({}) is not supported", zarr_format
         )};
     }
+}
+
+auto zarr::validate_dtype(std::string dtype) -> void {
+    const static auto dtype_pattern = std::regex {
+        "^([<>]?)([ifbu][1-9]|[ifbu][1-2][0-9]|[ifbu][3][0-2]|\\|(b|u)1)$"
+    };
+    if (dtype.empty() || !std::regex_match(dtype, dtype_pattern)) {
+        throw FailedToValidateMetadata { fmt::format(
+            "dtype value ({}) is invalid", dtype
+        )};
+    }
+}
+
+auto zarr::validate_order(std::string order) -> void {
+    if (order != "C" && order != "F") {
+        throw FailedToValidateMetadata { fmt::format(
+            "order value ({}) is invalid", order
+        )};
+    }
+}
+
+auto zarr::validate_metadata(const Metadata& metadata) -> void {
+    validate_zarr_format(metadata.zarr_format);
+    validate_dtype(metadata.dtype);
+    validate_order(metadata.order);
+
+    // TODO: validate shape
+    // TODO: validate chunks
+    // TODO: validate order
+    // TODO: validate fill_value
 }

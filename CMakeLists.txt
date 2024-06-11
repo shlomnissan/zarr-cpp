@@ -10,6 +10,9 @@ set(CMAKE_VISIBILITY_INLINE_HIDDEN ON)
 
 option(BUILD_TESTS "build tests" ON)
 
+find_package(fmt REQUIRED)
+find_package(nlohmann_json REQUIRED)
+
 add_subdirectory(src)
 
 if (BUILD_TESTS)
