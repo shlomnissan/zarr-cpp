@@ -26,9 +26,10 @@ struct ZARR_EXPORT Metadata {
 [[nodiscard]]
 auto load_metadata(Store* store) -> Metadata;
 
-auto validate_metadata(const Metadata& metadata) -> void;
-auto validate_zarr_format(unsigned int zarr_format) -> void;
+auto validate_dimension_separator(std::string_view separator) -> void;
 auto validate_dtype(std::string dtype) -> void;
+auto validate_metadata(const Metadata& metadata) -> void;
 auto validate_order(std::string order) -> void;
+auto validate_zarr_format(unsigned int zarr_format) -> void;
 
 };

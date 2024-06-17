@@ -45,11 +45,11 @@ auto zarr::load_metadata(Store* store) -> Metadata {
     return output;
 }
 
-auto zarr::validate_zarr_format(unsigned int zarr_format) -> void {
-    if (zarr_format != 2) {
+auto zarr::validate_dimension_separator(std::string_view separator) -> void {
+    if (separator != "/" && separator != ".") {
         throw FailedToValidateMetadata { fmt::format(
-            "zarr_format value ({}) is not supported", zarr_format
-        )};
+            "dimension_separator value ({}) is invalid", separator
+        )}; 
     }
 }
 
@@ -72,13 +72,21 @@ auto zarr::validate_order(std::string order) -> void {
     }
 }
 
+auto zarr::validate_zarr_format(unsigned int zarr_format) -> void {
+    if (zarr_format != 2) {
+        throw FailedToValidateMetadata { fmt::format(
+            "zarr_format value ({}) is not supported", zarr_format
+        )};
+    }
+}
+
 auto zarr::validate_metadata(const Metadata& metadata) -> void {
-    validate_zarr_format(metadata.zarr_format);
+    validate_dimension_separator(metadata.dimension_separator);
     validate_dtype(metadata.dtype);
     validate_order(metadata.order);
+    validate_zarr_format(metadata.zarr_format);
 
     // TODO: validate shape
     // TODO: validate chunks
-    // TODO: validate order
     // TODO: validate fill_value
 }
