@@ -1,0 +1,12 @@
+{
+    "dependencies": [
+        {
+            "name": "gtest",
+            "version>=": "1.15.2"
+        },
+        {
+            "name": "nlohmann-json",
+            "version>=": "3.12.0"
+        }
+    ]
+}
