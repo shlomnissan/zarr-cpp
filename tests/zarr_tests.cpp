@@ -8,7 +8,7 @@
 #pragma region open
 
 TEST(Zarr, Open) {
-    auto zarr = zarr::zarr_array::open("test.zarr");
+    auto zarr = zarr::ZarrArray::open("test.zarr");
 
     EXPECT_TRUE(zarr);
 }

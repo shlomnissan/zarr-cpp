@@ -5,8 +5,8 @@
 
 namespace zarr {
 
-auto zarr_array::open(const fs::path& path) -> std::expected<zarr_array, std::string> {
-    return zarr_array {};
+auto ZarrArray::open(const fs::path& path) -> std::expected<ZarrArray, std::string> {
+    return ZarrArray {};
 }
 
 } // namespace zarr

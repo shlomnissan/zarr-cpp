@@ -1,10 +1,12 @@
 set(PUBLIC_HEADERS_DIR ${CMAKE_SOURCE_DIR}/include/zarr)
 
 set(SOURCE_CODE
+    store.hpp
     zarr.cpp
 )
 
 set(PUBLIC_HEADERS
+    ${PUBLIC_HEADERS_DIR}/metadata.hpp
     ${PUBLIC_HEADERS_DIR}/zarr.hpp
 )
 
