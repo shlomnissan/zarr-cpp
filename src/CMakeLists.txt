@@ -1,13 +1,11 @@
 set(PUBLIC_HEADERS_DIR ${CMAKE_SOURCE_DIR}/include/zarr)
 
 set(SOURCE_CODE
-    math.cpp
-    math.hpp
-    vector2.cpp
+    zarr.cpp
 )
 
 set(PUBLIC_HEADERS
-    ${PUBLIC_HEADERS_DIR}/vector2.hpp
+    ${PUBLIC_HEADERS_DIR}/zarr.hpp
 )
 
 if(NOT_APPLE)
