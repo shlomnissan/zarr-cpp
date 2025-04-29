@@ -3,17 +3,22 @@
 
 #pragma once
 
+#include "zarr_export.h"
+
+#include "zarr/store.hpp"
+
+#include <expected>
 #include <optional>
 #include <string>
 #include <vector>
 
-namespace zarr {
+namespace ZARR_EXPORT zarr {
 
 /**
- * @struct Metadata
+ * @class Metadata
  * @brief Represents the metadata of a Zarr array.
  */
-struct Metadata {
+class Metadata {
 public:
     /// @brief Version of Zarr metadata format.
     unsigned int version;
@@ -35,6 +40,22 @@ public:
 
     /// @brief Fill value for uninitialized array elements.
     std::optional<unsigned int> fill_value;
+
+    /**
+     * @brief Parses metadata from the given storage backend.
+     *
+     * @param store Pointer to the storage backend from which metadata will be parsed.
+     * @return std::expected containing the parsed Metadata object if successful, or an error message string.
+     */
+    [[nodiscard]] static auto parse(Store* store) -> std::expected<Metadata, std::string>;
+
+private:
+    /**
+     * @brief Default constructor for Metadata.
+     *
+     * This constructor is private to enforce controlled creation of Metadata instances.
+     */
+    explicit Metadata() = default;
 };
 
 } // namespace zarr

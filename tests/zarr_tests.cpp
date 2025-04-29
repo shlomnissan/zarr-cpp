@@ -8,9 +8,9 @@
 #pragma region Open
 
 TEST(Zarr, Open) {
-    auto zarr = zarr::ZarrArray::open("test.zarr");
+    auto zarr = zarr::ZarrArray::open("fixtures/empty.zarr");
 
-    EXPECT_FALSE(zarr);
+    EXPECT_TRUE(zarr.has_value());
 }
 
 #pragma endregion

@@ -19,7 +19,7 @@ public:
 
     auto path() -> std::string override;
 
-    static auto open(const fs::path& path) -> std::expected<std::unique_ptr<StoreFileSystem>, std::string>;
+    [[nodiscard]] static auto open(const fs::path& path) -> std::expected<std::unique_ptr<StoreFileSystem>, std::string>;
 
 private:
     fs::path path_;

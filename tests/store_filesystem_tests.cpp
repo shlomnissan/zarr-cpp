@@ -8,10 +8,10 @@
 #pragma region Open
 
 TEST(StoreFileSystem, OpenValidPath) {
-    auto store = zarr::StoreFileSystem::open("fixtures/empty.zarr");
+    auto store = zarr::StoreFileSystem::open("fixtures/simple_BE.zarr");
 
     EXPECT_TRUE(store);
-    EXPECT_EQ(store.value()->path(), "fixtures/empty.zarr");
+    EXPECT_EQ(store.value()->path(), "fixtures/simple_BE.zarr");
 }
 
 TEST(StoreFileSystem, OpenInvalidPath) {
