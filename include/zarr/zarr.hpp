@@ -5,8 +5,11 @@
 
 #include "zarr_export.h"
 
+#include "zarr/store.hpp"
+
 #include <expected>
 #include <filesystem>
+#include <memory>
 #include <string>
 
 namespace zarr {
@@ -28,12 +31,15 @@ public:
     [[nodiscard]] static auto open(const fs::path& path) -> std::expected<ZarrArray, std::string>;
 
 private:
+    /// @brief Pointer to the storage backend.
+    std::unique_ptr<Store> store_;
+
     /**
-     * @brief Default constructor for ZarrArray.
+     * @brief Constructs a ZarrArray with the specified storage backend.
      *
-     * This constructor is private to enforce the use of the open() method for creating instances.
+     * @param store Unique pointer to the storage backend.
      */
-    ZarrArray() = default;
+    ZarrArray(std::unique_ptr<Store> store) : store_(std::move(store)) {}
 };
 
-};
+} // namespace zarr
