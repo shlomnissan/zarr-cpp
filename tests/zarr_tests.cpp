@@ -5,12 +5,12 @@
 
 #include <zarr/zarr.hpp>
 
-#pragma region open
+#pragma region Open
 
 TEST(Zarr, Open) {
     auto zarr = zarr::ZarrArray::open("test.zarr");
 
-    EXPECT_TRUE(zarr);
+    EXPECT_FALSE(zarr);
 }
 
 #pragma endregion

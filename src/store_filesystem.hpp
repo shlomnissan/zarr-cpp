@@ -13,16 +13,18 @@ namespace fs = std::filesystem;
 
 class StoreFileSystem : public Store {
 public:
-    static auto open(const fs::path& path) -> std::expected<std::unique_ptr<StoreFileSystem>, std::string>;
-
     auto exists(std::string_view key) -> bool override;
 
     auto get(std::string_view key, bool is_binary) -> std::expected<Buffer, std::string> override;
 
+    auto path() -> std::string override;
+
+    static auto open(const fs::path& path) -> std::expected<std::unique_ptr<StoreFileSystem>, std::string>;
+
 private:
     fs::path path_;
 
-    StoreFileSystem(const fs::path& path) : path_(path) {}
+    explicit StoreFileSystem(const fs::path& path) : path_(path) {}
 };
 
 } // namespace zarr

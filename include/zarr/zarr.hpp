@@ -39,7 +39,7 @@ private:
      *
      * @param store Unique pointer to the storage backend.
      */
-    ZarrArray(std::unique_ptr<Store> store) : store_(std::move(store)) {}
+    explicit ZarrArray(std::unique_ptr<Store> store) : store_(std::move(store)) {}
 };
 
 } // namespace zarr

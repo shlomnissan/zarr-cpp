@@ -39,6 +39,13 @@ public:
     [[nodiscard]] virtual auto get(std::string_view key, bool is_binary) -> std::expected<Buffer, std::string> = 0;
 
     /**
+     * @brief Retrieves the path associated with the storage backend.
+     *
+     * @return std::string representing the path.
+     */
+    [[nodiscard]] virtual auto path() -> std::string = 0;
+
+    /**
      * @brief Virtual destructor for the Store class.
      */
     virtual ~Store() = default;

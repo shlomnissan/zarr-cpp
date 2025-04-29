@@ -19,4 +19,11 @@ foreach(TEST IN LISTS TEST_SOURCES)
     add_executable(${TEST_TARGET} ${TEST})
     target_link_libraries(${TEST_TARGET} PRIVATE GTest::gtest GTest::gtest_main zarr)
     add_test(${NAME_NO_EXT} ${TEST_TARGET})
+
+    add_custom_command(
+        TARGET ${TEST_TARGET} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/fixtures
+        $<TARGET_FILE_DIR:${TEST_TARGET}>/fixtures
+    )
 endforeach()
