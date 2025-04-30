@@ -13,10 +13,15 @@ auto ZarrArray::open(const fs::path& path) -> std::expected<ZarrArray, std::stri
     auto store = StoreFileSystem::open(path);
     if (!store) return std::unexpected(store.error());
 
-    auto metadata = Metadata::parse(store.value().get());
+    auto result = store.value()->get(".zarray", true);
+    if (!result) {
+        return std::unexpected(result.error());
+    }
+
+    auto metadata = Metadata::parse(result.value());
     if (!metadata) return std::unexpected(metadata.error());
 
-    return ZarrArray {std::move(store.value())};
+    return ZarrArray {std::move(store.value()), metadata.value()};
 }
 
 } // namespace zarr

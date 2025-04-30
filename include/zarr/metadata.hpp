@@ -15,22 +15,28 @@
 namespace ZARR_EXPORT zarr {
 
 /**
+ * @typedef Buffer
+ * @brief Represents a buffer of binary data.
+ */
+using Buffer = std::vector<char>;
+
+/**
  * @class Metadata
  * @brief Represents the metadata of a Zarr array.
  */
 class Metadata {
 public:
     /// @brief Version of Zarr metadata format.
-    unsigned int version;
-
-    /// @brief Characters used to separate dimensions in the array.
-    char dimension_separator;
+    unsigned int zarr_format;
 
     /// @brief Memory layout order of the array.
     char order;
 
     /// @brief Data type of array elements.
     std::string dtype;
+
+    /// @brief Characters used to separate dimensions in the array.
+    std::string dimension_separator;
 
     /// @brief Shape of the array.
     std::vector<unsigned int> shape;
@@ -47,7 +53,7 @@ public:
      * @param store Pointer to the storage backend from which metadata will be parsed.
      * @return std::expected containing the parsed Metadata object if successful, or an error message string.
      */
-    [[nodiscard]] static auto parse(Store* store) -> std::expected<Metadata, std::string>;
+    [[nodiscard]] static auto parse(const Buffer& buffer) -> std::expected<Metadata, std::string>;
 
 private:
     /**

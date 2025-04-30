@@ -17,6 +17,8 @@ if(NOT_APPLE)
     set(CMAKE_INSTALL_RPATH "$ORIGIN")
 endif()
 
+find_package(nlohmann_json CONFIG REQUIRED)
+
 add_library(${PROJECT_NAME} ${SOURCE_CODE} ${PUBLIC_HEADERS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -28,6 +30,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 set_target_properties(${PROJECT_NAME} PROPERTIES
     VERSION ${zarr_VERSION_MAJOR}.${zarr_VERSION_MINOR}.${zarr_VERSION_PATCH}
     SOVERSION ${zarr_VERSION_MAJOR}
+)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    nlohmann_json::nlohmann_json
 )
 
 include(GenerateExportHeader)
