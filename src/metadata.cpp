@@ -3,6 +3,7 @@
 
 #include "zarr/metadata.hpp"
 
+#include <format>
 #include <string>
 
 #include <nlohmann/json.hpp>
@@ -32,10 +33,7 @@ auto Metadata::parse(const Buffer& buffer) -> std::expected<Metadata, std::strin
         output.order = j.at("order").get<std::string>().at(0);
         output.dimension_separator = j.value("dimension_separator", ".");
     } catch(const nlohmann::json::exception& e) {
-        return std::unexpected(std::format(
-            "Failed to parse JSON metadata: {}",
-            e.what()
-        ));
+        return std::unexpected(std::format("Failed to parse JSON metadata {}", e.what()));
     }
 
     return output;
