@@ -18,7 +18,7 @@ using Buffer = std::vector<char>;
 
 /**
  * @class Store
- * @brief Abstract abse class for Zarr storage backends.
+ * @brief Represents an abstract base class for Zarr storage backends.
  */
 class Store {
 public:
@@ -34,10 +34,9 @@ public:
      * @brief Retrieves the data associated with a key.
      *
      * @param key Key to retrieve data for.
-     * @param is_binary Indicates whether the data should be treated as binary.
      * @return std::expected containing the data buffer if successful, or an error message string.
      */
-    [[nodiscard]] virtual auto get(std::string_view key, bool is_binary) -> std::expected<Buffer, std::string> = 0;
+    [[nodiscard]] virtual auto get(std::string_view key) -> std::expected<Buffer, std::string> = 0;
 
     /**
      * @brief Retrieves the path associated with the storage backend.

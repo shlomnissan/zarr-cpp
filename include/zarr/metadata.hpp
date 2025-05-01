@@ -10,19 +10,14 @@
 #include <expected>
 #include <optional>
 #include <string>
+#include <span>
 #include <vector>
 
 namespace ZARR_EXPORT zarr {
 
 /**
- * @typedef Buffer
- * @brief Represents a buffer of binary data.
- */
-using Buffer = std::vector<char>;
-
-/**
  * @class Metadata
- * @brief Represents the metadata of a Zarr array.
+ * @brief Represents metadata of a Zarr array.
  */
 class Metadata {
 public:
@@ -53,9 +48,11 @@ public:
      * @param store Pointer to the storage backend from which metadata will be parsed.
      * @return std::expected containing the parsed Metadata object if successful, or an error message string.
      */
-    [[nodiscard]] static auto parse(const Buffer& buffer) -> std::expected<Metadata, std::string>;
+    [[nodiscard]] static auto parse(std::string_view buffer) -> std::expected<Metadata, std::string>;
 
 private:
+    friend class MetadataTest;
+
     /**
      * @brief Default constructor for Metadata.
      *

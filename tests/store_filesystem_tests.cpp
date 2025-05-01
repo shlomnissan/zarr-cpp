@@ -5,6 +5,8 @@
 
 #include "store_filesystem.hpp"
 
+#include <iostream>
+
 #pragma region Open
 
 TEST(StoreFileSystem, OpenValidPath) {
@@ -45,23 +47,26 @@ TEST(StoreFileSystem, ExistsWithInvalidKey) {
 
 #pragma region Get
 
-// TEST(StoreFileSystem, GetTextFile) {
-//     auto store = zarr::StoreFileSystem::open("fixtures/simple_BE.zarr");
-//     auto result = store.value()->get(".zarray", false);
+TEST(StoreFileSystem, GetTextFile) {
+    auto store = zarr::StoreFileSystem::open("fixtures/simple_BE.zarr");
+    auto result = store.value()->get(".zarray");
+    if (!result) {
+        std::cerr << "Error: " << result.error() << std::endl;
+    }
 
-//     EXPECT_TRUE(result);
-// }
+    EXPECT_TRUE(result);
+}
 
 TEST(StoreFileSystem, GetBinaryFile) {
     auto store = zarr::StoreFileSystem::open("fixtures/simple_BE.zarr");
-    auto result = store.value()->get("0.0", true);
+    auto result = store.value()->get("0.0");
 
     EXPECT_TRUE(result);
 }
 
 TEST(StoreFileSystem, GetInvalidKey) {
     auto store = zarr::StoreFileSystem::open("fixtures/simple_BE.zarr");
-    auto result = store.value()->get("invalid_key", true);
+    auto result = store.value()->get("invalid_key");
 
     EXPECT_FALSE(result);
     EXPECT_EQ(
@@ -72,7 +77,7 @@ TEST(StoreFileSystem, GetInvalidKey) {
 
 TEST(StoreFileSystem, GetEmptyFile) {
     auto store = zarr::StoreFileSystem::open("fixtures/empty.zarr");
-    auto result = store.value()->get("empty", false);
+    auto result = store.value()->get("empty");
 
     EXPECT_FALSE(result);
     EXPECT_EQ(

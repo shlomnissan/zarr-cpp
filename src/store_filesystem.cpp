@@ -18,13 +18,13 @@ auto StoreFileSystem::exists(std::string_view key) -> bool {
     return fs::exists(std::format("{}/{}", path_.string(), key));
 }
 
-auto StoreFileSystem::get(std::string_view key, bool is_binary) -> std::expected<Buffer, std::string> {
+auto StoreFileSystem::get(std::string_view key) -> std::expected<Buffer, std::string> {
     if (!exists(key)) {
         return std::unexpected(make_error(key, "Key does not exist in the store."));
     }
 
     const auto path = std::format("{}/{}", path_.string(), key);
-    auto file = std::ifstream(path, is_binary ? std::ios::binary : std::ios::in);
+    auto file = std::ifstream(path, std::ios::in | std::ios::binary);
     if (!file) {
         return std::unexpected(make_error(key, "Failed to open the file."));
     }

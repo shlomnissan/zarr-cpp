@@ -19,8 +19,16 @@ namespace nlohmann {
 
 namespace zarr {
 
-auto Metadata::parse(const Buffer& buffer) -> std::expected<Metadata, std::string> {
-    auto json_string = std::string(begin(buffer), end(buffer));
+namespace {
+
+auto validate_order(const char order) -> bool {
+    return order == 'C' || order == 'F';
+}
+
+}
+
+auto Metadata::parse(std::string_view buffer) -> std::expected<Metadata, std::string> {
+    auto json_string = std::string(buffer);
     auto output = Metadata {};
 
     try {
@@ -34,6 +42,10 @@ auto Metadata::parse(const Buffer& buffer) -> std::expected<Metadata, std::strin
         output.dimension_separator = j.value("dimension_separator", ".");
     } catch(const nlohmann::json::exception& e) {
         return std::unexpected(std::format("Failed to parse JSON metadata {}", e.what()));
+    }
+
+    if (!validate_order(output.order)) {
+        return std::unexpected("Invalid order value. Expected 'C' or 'F'.");
     }
 
     return output;

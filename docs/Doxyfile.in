@@ -10,4 +10,4 @@ USE_MDFILE_AS_MAINPAGE = @CMAKE_SOURCE_DIR@/docs/overview.md
 MARKDOWN_SUPPORT       = YES
 RECURSIVE              = YES
 GENERATE_LATEX         = NO
-HAVE_DOT               = NO
+HAVE_DOT               = YES

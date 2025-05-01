@@ -15,7 +15,7 @@ class StoreFileSystem : public Store {
 public:
     auto exists(std::string_view key) -> bool override;
 
-    auto get(std::string_view key, bool is_binary) -> std::expected<Buffer, std::string> override;
+    auto get(std::string_view key) -> std::expected<Buffer, std::string> override;
 
     auto path() -> std::string override;
 
